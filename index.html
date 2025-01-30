@@ -258,6 +258,101 @@
             padding-left: 2rem;
             margin: 2rem 0;
         }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .hero {
+        padding: 4rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero::before {
+        font-size: 12vw;
+        white-space: pre-wrap;
+        text-align: center;
+    }
+
+    /* Timeline adjustments */
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-content {
+        width: calc(100% - 3rem);
+        margin-left: 2rem;
+        padding: 1.5rem;
+    }
+
+    .timeline-content::before {
+        left: -2rem !important;
+        font-size: 1.5rem;
+    }
+
+    /* Phase container adjustments */
+    .phase-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .phase-marker {
+        position: relative;
+        top: auto;
+        margin-bottom: 1rem;
+    }
+
+    /* Grid adjustments */
+    .sacrifice-grid,
+    .project-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sacrifice-card,
+    .project-card,
+    .stat-box {
+        padding: 1rem;
+    }
+
+    /* Typography adjustments */
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    /* Code blocks */
+    p {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .timeline-content {
+        width: calc(100% - 1.5rem);
+        margin-left: 1.5rem;
+    }
+
+    .tech-pill {
+        font-size: 0.8rem;
+    }
+
+    .stat-box {
+        padding: 1rem 0.5rem;
+    }
+}
     </style>
 </head>
 
