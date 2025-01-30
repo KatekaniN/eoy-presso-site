@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code & Compromise: My Dev Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #EC5749;
+            --secondary: #091c38;
+            --accent: #ccd6f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fira Code', monospace;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--accent);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Terminal Header */
+        .terminal-header {
+            background-color: #020c1b;
+            padding: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .terminal-buttons span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .red {
+            background-color: #ff5f56;
+        }
+
+        .yellow {
+            background-color: #ffbd2e;
+        }
+
+        .green {
+            background-color: #27c93f;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '404: Life Not Found';
+            position: absolute;
+            opacity: 0.1;
+            font-size: 15vw;
+            white-space: nowrap;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '➤';
+            position: absolute;
+            color: var(--primary);
+            font-size: 2rem;
+            top: 1rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -2.5rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -2.5rem;
+            transform: scaleX(-1);
+        }
+
+        .sacrifice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .sacrifice-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        .ogcta-badge {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                justify-content: flex-start !important;
+            }
+
+            .timeline-content {
+                width: 80%;
+                margin-left: 2.5rem;
+            }
+
+            .timeline-content::before {
+                left: -2.5rem !important;
+                transform: scaleX(-1);
+            }
+        }
+
+        .phase-container {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .phase-marker {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 1rem;
+            border-left: 3px solid var(--primary);
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-pill {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .roadmap {
+            border-left: 3px solid var(--primary);
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="terminal-header">
+        <div class="terminal-buttons">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Life.prototype = Developer;</h1>
+            <p>// Forced to refactor my existence</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3><span class="error">Error 2023:</span> Unexpected Life Deprecation</h3>
+                    <p>Position: Business Development Coordinator<br>
+                        Status: <span class="error">Terminated</span><br>
+                        Savings: <span class="error">Depleting</span><br>
+                        Education: <span class="error">Paused</span></p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Critical Decision:</h3>
+                    <p>if (financialSecurity) {<br>
+                        &nbsp;&nbsp;return comfortZone;<br>
+                        } else {<br>
+                        &nbsp;&nbsp;learnToCode();<br>
+                        }</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>System Rebuild Initialized</h3>
+                    <div class="sacrifice-grid">
+                        <div class="sacrifice-card">
+                            <i class="fas fa-car-crash"></i>
+                            <h4>Asset Liquidation</h4>
+                            <p>Dream Car → Capital</p>
+                        </div>
+                        <div class="sacrifice-card">
+                            <i class="fas fa-city"></i>
+                            <h4>Geographic Shift</h4>
+                            <p>Pretoria → Johannesburg</p>
+                        </div>
+                        <div class="sacrifice-card">
+                            <i class="fas fa-home"></i>
+                            <h4>Space Optimization</h4>
+                            <p>3-bedroom → 1-bedroom</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="ogcta-badge">OGCTA Program v1.0</div>
+                    <h3>New Blueprint Acquired</h3>
+                    <p>Installing dependencies:<br>
+                        - HTML/CSS<br>
+                        - JavaScript<br>
+                        - System Design<br>
+                        - Professional Development</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container">
+       
+
+        <!-- Phase 2: System Architecture -->
+        <section class="phase-container">
+            <div class="phase-marker">
+                <h3>v2.0</h3>
+                <p>System Architecture</p>
+                <div class="tech-stack">
+                    <span class="tech-pill">HTML</span>
+                    <span class="tech-pill">CSS</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <h3>Initial Commit: Building Foundations</h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">0</div>
+                        <p>Real-world apps deployed</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">∞</div>
+                        <p>Imposter syndrome instances</p>
+                    </div>
+                </div>
+                <p>Starting with static pages and unstyled buttons, gradually building UI/UX understanding and good web development practices</p>
+            </div>
+        </section>
+
+        <!-- Phase 3: Development & Implementation -->
+        <section class="phase-container">
+            <div class="phase-marker">
+                <h3>v3.0</h3>
+                <p>Active Development</p>
+                <div class="tech-stack">
+                    <span class="tech-pill">Node.js</span>
+                    <span class="tech-pill">Express.js</span>
+                    <span class="tech-pill">Docker</span>
+                    <span class="tech-pill">PostgreSQL</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <h3>Continuous Integration</h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">84/97</div>
+                        <p>Umuzi Projects Completed</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">616+</div>
+                        <p>Codewars Challenges</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">27+</div>
+                        <p>HackerRank Solutions</p>
+                    </div>
+                </div>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h4>Nightly Routine</h4>
+                        <p>while (asleep == false) { solveProblems(); }</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>User Research</h4>
+                        <p>Conducted 50+ interviews enhancing UI/UX instincts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4: Testing & Debugging -->
+        <section class="phase-container">
+            <div class="phase-marker">
+                <h3>v4.0</h3>
+                <p>Quality Assurance</p>
+                <div class="tech-stack">
+                    <span class="tech-pill">React </span>
+                    <span class="tech-pill">Firebase</span>
+                    <span class="tech-pill">Mapbox</span>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">JavaScript</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <h3>Stress Testing Through Hackathons</h3>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h4>Safe Spaces</h4>
+                        <p>Women's safety app using geolocation</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">Mapbox</span>
+                            <span class="tech-pill">MongoDB</span>
+                            <span class="tech-pill">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h4>BizBacker</h4>
+                        <p>Fintech crowdfunding platform</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Firebase</span>
+                            <span class="tech-pill">Python</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="code-comment">// Learned: Team leadership, strategic delegation, react library for web development
+                    fundamentals</p>
+            </div>
+        </section>
+
+        <!-- Phase 5: Deployment -->
+        <section class="phase-container">
+            <div class="phase-marker">
+                <h3>v5.0</h3>
+                <p>Production Ready</p>
+                <div class="tech-stack">
+                    <span class="tech-pill">OpenAI</span>
+                    <span class="tech-pill">Google Vision</span>
+                    <span class="tech-pill">React</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <h3>MVPs in Production</h3>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h4>Amapiano Sound Lab</h4>
+                        <p>Incredibox-inspired music maker</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>AI Website Builder</h4>
+                        <p>GPT-powered site generation</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Mood Analysis App</h4>
+                        <p>Emotion-based recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 6: Maintenance & Future -->
+        <section class="phase-container">
+            <div class="phase-marker">
+                <h3>v6.0</h3>
+                <p>Future Roadmap</p>
+                <div class="tech-stack">
+                    <span class="tech-pill">Web Development</span>
+                    <span class="tech-pill">API</span>
+                    <span class="tech-pill">AI</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <h3>Continuous Deployment</h3>
+                <div class="roadmap">
+                    <h4>Planned Features:</h4>
+                    <p>➤ Frontend development specialization through tutorials and building personal projects</p>
+                    <p>➤ Complete Cadbury Festive Flavour Finder</p>
+                    <p>➤ Enhanced AI website builder</p>
+                    <p>➤ Finish Umuzi projects and Maths Stats degree</p>
+                </div>
+                <p class="code-comment">// Goal: Use tech to empower myself to build a meaningful career and awesome pr ojects for brands</p>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="hero">
+            <div class="container">
+                <h1>git push origin future</h1>
+                <p>// Deploying version 2.0 of myself</p>
+                <div class="stats-grid" style="margin-top: 2rem;">
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <p>Purpose-Driven Career Building Apps</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Add intersection observer for phase animations
+        const observers = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.phase-container').forEach(container => {
+            container.style.opacity = 0;
+            container.style.transform = 'translateY(20px)';
+            container.style.transition = 'all 0.8s ease-out';
+            observers.observe(container);
+        });
+
+        // Add typing effect to code elements
+        document.addEventListener('DOMContentLoaded', function () {
+            const codeElements = document.querySelectorAll('p');
+            codeElements.forEach(el => {
+                if (el.textContent.includes('{') || el.textContent.includes(';')) {
+                    el.style.opacity = '0';
+                    setTimeout(() => {
+                        el.style.transition = 'opacity 1s';
+                        el.style.opacity = '1';
+                    }, 500);
+                }
+            });
+
+            // Add scroll animation to timeline
+            const timelineItems = document.querySelectorAll('.timeline-content');
+            window.addEventListener('scroll', () => {
+                timelineItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    if (itemTop < window.innerHeight * 0.8) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
